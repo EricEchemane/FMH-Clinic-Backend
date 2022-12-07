@@ -1,6 +1,6 @@
-import { Injectable } from '@nestjs/common';
+import { ForbiddenException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { QueryFailedError, Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
@@ -23,6 +23,12 @@ export class UserService {
       await this.usersRepository.save(user);
       return user;
     } catch (error) {
+      if (
+        error instanceof QueryFailedError &&
+        error.message.startsWith('duplicate key')
+      ) {
+        throw new ForbiddenException('Credentials already taken');
+      }
       throw error;
     }
   }
