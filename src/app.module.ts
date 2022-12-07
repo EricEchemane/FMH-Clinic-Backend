@@ -1,8 +1,10 @@
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import environment from './config/environment';
+import typeormConfig from './config/typeorm';
 
 @Module({
   imports: [
@@ -10,6 +12,7 @@ import environment from './config/environment';
       isGlobal: true,
       load: [environment],
     }),
+    TypeOrmModule.forRootAsync(typeormConfig),
   ],
   controllers: [AppController],
   providers: [AppService],
