@@ -16,7 +16,8 @@ export default () => {
         PGPORT: 5432,
         PGUSER: 'postgres',
       };
-    case 'production':
+    // production
+    default:
       return {
         PGDATABASE: 'railway',
         PGHOST: 'containers-us-west-125.railway.app',
@@ -24,7 +25,5 @@ export default () => {
         PGPORT: 7177,
         PGUSER: 'postgres',
       };
-    default:
-      return null;
   }
 };
