@@ -6,6 +6,7 @@ import { ConfigModule } from '@nestjs/config';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { PasswordResetModule } from './password-reset/password-reset.module';
+import { SchedulingModule } from './scheduling/scheduling.module';
 import typeormConfig from './config/typeorm';
 import getEnvPath from './config/get-env-path';
 
@@ -19,6 +20,7 @@ import getEnvPath from './config/get-env-path';
     UserModule,
     AuthModule,
     PasswordResetModule,
+    SchedulingModule,
   ],
   controllers: [AppController],
   providers: [AppService],
