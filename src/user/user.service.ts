@@ -35,13 +35,13 @@ export class UserService {
       throw error;
     }
   }
-  findAll() {
-    return `This action returns all user`;
-  }
   async findOne(email: string) {
     const user = await this.usersRepository.findOneBy({ email });
     if (user) return user;
     throw new NotFoundException(`User with email: ${email} does not exist`);
+  }
+  findAll() {
+    return `This action returns all user`;
   }
   update(id: number, updateUserDto: UpdateUserDto) {
     return `This action updates a #${id} user`;

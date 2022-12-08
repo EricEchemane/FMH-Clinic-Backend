@@ -1,5 +1,7 @@
 export default () => {
   const JWTSECRET = 'njas76d7aysdagsdta76das7dahkljfd7';
+  const GOOGLEPASSWORD = 'whymrbhhbryfymeu';
+  const GMAILSENDER = 'client.ericechemane@gmail.com';
   switch (process.env.NODE_ENV) {
     case 'development':
       return {
@@ -9,6 +11,8 @@ export default () => {
         PGPORT: 5432,
         PGUSER: 'postgres',
         JWTSECRET,
+        GOOGLEPASSWORD,
+        GMAILSENDER,
       };
     case 'test':
       return {
@@ -18,6 +22,8 @@ export default () => {
         PGPORT: 5432,
         PGUSER: 'postgres',
         JWTSECRET,
+        GOOGLEPASSWORD,
+        GMAILSENDER,
       };
     // production
     default:
@@ -28,6 +34,8 @@ export default () => {
         PGPORT: 7177,
         PGUSER: 'postgres',
         JWTSECRET,
+        GOOGLEPASSWORD,
+        GMAILSENDER,
       };
   }
 };
