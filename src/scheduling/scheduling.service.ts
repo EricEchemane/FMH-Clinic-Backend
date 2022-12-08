@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { CreateSchedulingDto } from './dto/create-scheduling.dto';
-import { UpdateSchedulingDto } from './dto/update-scheduling.dto';
+import { CreateSchedulingDto, UpdateSchedulingDto } from './dto';
 
 @Injectable()
 export class SchedulingService {
