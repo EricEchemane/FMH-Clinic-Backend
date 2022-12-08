@@ -40,6 +40,23 @@ export class UserService {
     if (user) return user;
     throw new NotFoundException(`User with email: ${email} does not exist`);
   }
+  async findOneById(id: string) {
+    try {
+      const user = await this.usersRepository.findOneBy({ id });
+      if (user) return user;
+      throw new NotFoundException(`User with id: ${id} does not exist`);
+    } catch (error) {
+      if (
+        error instanceof QueryFailedError &&
+        error.message.startsWith('invalid input syntax for type uuid:')
+      ) {
+        throw new NotFoundException(`User with id: ${id} does not exist`);
+      }
+    }
+  }
+  saveUser(user: User) {
+    return this.usersRepository.save(user);
+  }
   findAll() {
     return `This action returns all user`;
   }

@@ -1,9 +1,11 @@
-import { ConfigService } from '@nestjs/config';
-import { Injectable } from '@nestjs/common';
-import frontEndOrigin from './front-end-origin';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const nodemailer = require('nodemailer');
+import { ConfigService } from '@nestjs/config';
+import { ForbiddenException, Injectable } from '@nestjs/common';
+import frontEndOrigin from './front-end-origin';
 import { UserService } from 'src/user/user.service';
+import { ResetPasswordDto } from './dto';
+import * as argon from 'argon2';
 
 @Injectable()
 export class PasswordResetService {
@@ -42,5 +44,16 @@ export class PasswordResetService {
     };
 
     await transporter.sendMail(mailConfig);
+  }
+
+  async resetPassword({ newPassword, userId }: ResetPasswordDto) {
+    const user = await this.userService.findOneById(userId);
+    if (!user) {
+      throw new ForbiddenException();
+    }
+    const hash = await argon.hash(newPassword);
+    user.hash = hash;
+    await this.userService.saveUser(user);
+    return user;
   }
 }
