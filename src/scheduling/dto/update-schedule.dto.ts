@@ -1,4 +1,13 @@
 import { PartialType } from '@nestjs/mapped-types';
-import { CreateScheduleDto } from './create-schedule.dto';
+import { IsBoolean, IsEnum } from 'class-validator';
+import { ScheduleStatus } from '../types';
 
-export class UpdateScheduleDto extends PartialType(CreateScheduleDto) {}
+class ScheduleForUpdate {
+  @IsBoolean()
+  archived: boolean;
+
+  @IsEnum(ScheduleStatus)
+  status: ScheduleStatus;
+}
+
+export class UpdateScheduleDto extends PartialType(ScheduleForUpdate) {}

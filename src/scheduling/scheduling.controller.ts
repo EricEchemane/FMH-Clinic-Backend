@@ -6,8 +6,9 @@ import {
   UnauthorizedException,
   Get,
   Param,
+  Patch,
 } from '@nestjs/common';
-import { CreateScheduleDto } from './dto';
+import { CreateScheduleDto, UpdateScheduleDto } from './dto';
 import { JwtAuthGuard } from 'src/auth/guard/jwt-auth.guard';
 import { SchedulingService } from './scheduling.service';
 import { GetUser, RequestUser } from 'src/user/decorators/get-user.decorator';
@@ -45,13 +46,13 @@ export class SchedulingController {
     return this.schedulingService.findOneBy({ id });
   }
 
-  // @Patch(':id')
-  // update(
-  //   @Param('id') id: string,
-  //   @Body() updateSchedulingDto: UpdateSchedulingDto,
-  // ) {
-  //   return this.schedulingService.update(+id, updateSchedulingDto);
-  // }
+  @Patch(':id')
+  update(
+    @Param('id') id: string,
+    @Body() updateSchedulingDto: UpdateScheduleDto,
+  ) {
+    return this.schedulingService.update(id, updateSchedulingDto);
+  }
 
   // @Delete(':id')
   // remove(@Param('id') id: string) {

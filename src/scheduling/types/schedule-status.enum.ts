@@ -1,5 +1,5 @@
 export enum ScheduleStatus {
-  PENDING = 'PENDING',
-  DONE = 'DONE',
-  CANCELLED = 'CANCELLED',
+  pending = 'pending',
+  done = 'done',
+  cancelled = 'cancelled',
 }
