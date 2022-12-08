@@ -21,9 +21,9 @@ export class SchedulingService {
     return newEntry;
   }
 
-  // findAll() {
-  //   return `This action returns all scheduling`;
-  // }
+  findAll() {
+    return this.schedulesRepository.find();
+  }
 
   // findOne(id: number) {
   //   return `This action returns a #${id} scheduling`;

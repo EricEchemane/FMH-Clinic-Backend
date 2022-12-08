@@ -4,6 +4,7 @@ import {
   Body,
   UseGuards,
   UnauthorizedException,
+  Get,
 } from '@nestjs/common';
 import { CreateScheduleDto } from './dto';
 import { JwtAuthGuard } from 'src/auth/guard/jwt-auth.guard';
@@ -27,10 +28,16 @@ export class SchedulingController {
     return this.schedulingService.create(createSchedulingDto, user);
   }
 
-  // @Get()
-  // findAll() {
-  //   return this.schedulingService.findAll();
-  // }
+  @Get()
+  findAll(@GetUser() user: RequestUser) {
+    // restrict to customers
+    if (user.role === UserRole.customer) {
+      throw new UnauthorizedException(
+        'You are not allowed to to access this route',
+      );
+    }
+    return this.schedulingService.findAll();
+  }
 
   // @Get(':id')
   // findOne(@Param('id') id: string) {
