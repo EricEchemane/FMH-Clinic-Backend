@@ -1,10 +1,24 @@
 import { Injectable } from '@nestjs/common';
-import { CreateSchedulingDto, UpdateSchedulingDto } from './dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { RequestUser } from 'src/user/decorators/get-user.decorator';
+import { Repository } from 'typeorm';
+import { CreateScheduleDto } from './dto';
+import { Schedule } from './entities';
 
 @Injectable()
 export class SchedulingService {
-  create(createSchedulingDto: CreateSchedulingDto) {
-    return 'This action adds a new scheduling';
+  constructor(
+    @InjectRepository(Schedule)
+    private schedulesRepository: Repository<Schedule>,
+  ) {}
+
+  async create(createScheduleDto: CreateScheduleDto, user: RequestUser) {
+    const newEntry = this.schedulesRepository.create(createScheduleDto);
+    await this.schedulesRepository.save({
+      ...createScheduleDto,
+      email: user.email,
+    });
+    return newEntry;
   }
 
   // findAll() {

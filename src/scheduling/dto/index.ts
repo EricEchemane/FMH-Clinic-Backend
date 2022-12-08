@@ -1,2 +1,2 @@
-export * from './create-scheduling.dto';
-export * from './update-scheduling.dto';
+export * from './create-schedule.dto';
+export * from './update-schedule.dto';

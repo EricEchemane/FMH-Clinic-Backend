@@ -1,6 +1,7 @@
-import { Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { PetServices, ScheduleStatus } from '../types';
 
+@Entity()
 export class Schedule {
   @PrimaryGeneratedColumn('uuid')
   id: string;
@@ -15,7 +16,7 @@ export class Schedule {
   name: string;
 
   @Column()
-  petName: string;
+  pet_name: string;
 
   @Column({
     type: 'enum',
@@ -29,9 +30,10 @@ export class Schedule {
   @Column({
     type: 'enum',
     enum: ScheduleStatus,
+    default: ScheduleStatus.PENDING,
   })
   status: ScheduleStatus;
 
-  @Column()
+  @Column({ default: false })
   archived: boolean;
 }

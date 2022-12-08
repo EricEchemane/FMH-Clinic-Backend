@@ -1,16 +1,15 @@
 import {
   Controller,
-  Get,
   Post,
   Body,
-  Patch,
-  Param,
-  Delete,
   UseGuards,
+  UnauthorizedException,
 } from '@nestjs/common';
-import { SchedulingService } from './scheduling.service';
-import { CreateSchedulingDto, UpdateSchedulingDto } from './dto';
+import { CreateScheduleDto } from './dto';
 import { JwtAuthGuard } from 'src/auth/guard/jwt-auth.guard';
+import { SchedulingService } from './scheduling.service';
+import { GetUser, RequestUser } from 'src/user/decorators/get-user.decorator';
+import { UserRole } from 'src/user/entities';
 
 @UseGuards(JwtAuthGuard)
 @Controller('scheduling')
@@ -18,8 +17,14 @@ export class SchedulingController {
   constructor(private readonly schedulingService: SchedulingService) {}
 
   @Post()
-  create(@Body() createSchedulingDto: CreateSchedulingDto) {
-    return this.schedulingService.create(createSchedulingDto);
+  create(
+    @Body() createSchedulingDto: CreateScheduleDto,
+    @GetUser() user: RequestUser,
+  ) {
+    if (user.role !== UserRole.customer) {
+      throw new UnauthorizedException('Only customer can make a schedule');
+    }
+    return this.schedulingService.create(createSchedulingDto, user);
   }
 
   // @Get()
