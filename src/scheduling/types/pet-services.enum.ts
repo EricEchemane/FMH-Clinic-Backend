@@ -1,0 +1,5 @@
+export enum PetServices {
+  GROOMING = 'GROOMING',
+  VET_CONSULTATION = 'VET_CONSULTATION',
+  OTHERS = 'OTHERS',
+}
