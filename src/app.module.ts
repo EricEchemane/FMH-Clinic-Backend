@@ -6,14 +6,14 @@ import { ConfigModule } from '@nestjs/config';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { PasswordResetModule } from './password-reset/password-reset.module';
-import environment from './config/environment';
 import typeormConfig from './config/typeorm';
+import getEnvPath from './config/get-env-path';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      load: [environment],
+      envFilePath: getEnvPath(),
     }),
     TypeOrmModule.forRootAsync(typeormConfig),
     UserModule,
