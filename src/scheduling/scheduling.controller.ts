@@ -6,10 +6,13 @@ import {
   Patch,
   Param,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
 import { SchedulingService } from './scheduling.service';
 import { CreateSchedulingDto, UpdateSchedulingDto } from './dto';
+import { JwtAuthGuard } from 'src/auth/guard/jwt-auth.guard';
 
+@UseGuards(JwtAuthGuard)
 @Controller('scheduling')
 export class SchedulingController {
   constructor(private readonly schedulingService: SchedulingService) {}
@@ -19,26 +22,26 @@ export class SchedulingController {
     return this.schedulingService.create(createSchedulingDto);
   }
 
-  @Get()
-  findAll() {
-    return this.schedulingService.findAll();
-  }
+  // @Get()
+  // findAll() {
+  //   return this.schedulingService.findAll();
+  // }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.schedulingService.findOne(+id);
-  }
+  // @Get(':id')
+  // findOne(@Param('id') id: string) {
+  //   return this.schedulingService.findOne(+id);
+  // }
 
-  @Patch(':id')
-  update(
-    @Param('id') id: string,
-    @Body() updateSchedulingDto: UpdateSchedulingDto,
-  ) {
-    return this.schedulingService.update(+id, updateSchedulingDto);
-  }
+  // @Patch(':id')
+  // update(
+  //   @Param('id') id: string,
+  //   @Body() updateSchedulingDto: UpdateSchedulingDto,
+  // ) {
+  //   return this.schedulingService.update(+id, updateSchedulingDto);
+  // }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.schedulingService.remove(+id);
-  }
+  // @Delete(':id')
+  // remove(@Param('id') id: string) {
+  //   return this.schedulingService.remove(+id);
+  // }
 }
