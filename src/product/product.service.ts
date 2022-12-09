@@ -1,6 +1,10 @@
-import { Injectable } from '@nestjs/common';
+import {
+  Injectable,
+  BadRequestException,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository, QueryFailedError } from 'typeorm';
 import { CreateProductDto } from './dto';
 import { Product } from './entities';
 
@@ -21,9 +25,21 @@ export class ProductService {
     return this.productsRepository.find();
   }
 
-  // findOne(id: number) {
-  //   return `This action returns a #${id} product`;
-  // }
+  async findOne(id: string) {
+    try {
+      const product = await this.productsRepository.findOneBy({ id });
+      if (!product) throw new NotFoundException('Product not found');
+      return product;
+    } catch (error) {
+      if (
+        error instanceof QueryFailedError &&
+        error.message.startsWith('invalid input syntax for type uuid:')
+      ) {
+        throw new BadRequestException('invalid format of product id');
+      }
+      throw error;
+    }
+  }
 
   // update(id: number, updateProductDto: UpdateProductDto) {
   //   return `This action updates a #${id} product`;
