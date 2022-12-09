@@ -1,7 +1,9 @@
-import { Controller, Post, Body } from '@nestjs/common';
+import { Controller, Post, Body, Get, UseGuards, Param } from '@nestjs/common';
 import { PurchaseService } from './purchase.service';
 import { CreatePurchaseDto } from './dto';
+import { JwtAuthGuard } from 'src/auth/guard/jwt-auth.guard';
 
+@UseGuards(JwtAuthGuard)
 @Controller('purchase')
 export class PurchaseController {
   constructor(private readonly purchaseService: PurchaseService) {}
@@ -11,15 +13,15 @@ export class PurchaseController {
     return this.purchaseService.create(createPurchaseDto);
   }
 
-  // @Get()
-  // findAll() {
-  //   return this.purchaseService.findAll();
-  // }
+  @Get()
+  findAll() {
+    return this.purchaseService.findAll();
+  }
 
-  // @Get(':id')
-  // findOne(@Param('id') id: string) {
-  //   return this.purchaseService.findOne(+id);
-  // }
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.purchaseService.findOne(id);
+  }
 
   // @Patch(':id')
   // update(
