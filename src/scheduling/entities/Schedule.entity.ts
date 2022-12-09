@@ -10,6 +10,9 @@ export class Schedule {
   date: Date;
 
   @Column()
+  iso_date: string;
+
+  @Column()
   email: string;
 
   @Column()

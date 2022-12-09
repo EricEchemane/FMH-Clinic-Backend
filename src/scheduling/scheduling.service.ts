@@ -18,6 +18,7 @@ export class SchedulingService {
     newEntry = await this.schedulesRepository.save({
       ...createScheduleDto,
       email: user.email,
+      iso_date: new Date(createScheduleDto.date).toDateString(),
     });
     return newEntry;
   }
@@ -52,6 +53,10 @@ export class SchedulingService {
     await this.schedulesRepository.save(schedule);
     return schedule;
   }
+
+  // async getSchedulesOn(date: Date) {
+  // const searchFilter = { date:  };
+  // }
 
   // remove(id: number) {
   //   return `This action removes a #${id} scheduling`;
