@@ -57,9 +57,9 @@ export class UserService {
   saveUser(user: User) {
     return this.usersRepository.save(user);
   }
-  // findAll() {
-  //   return `This action returns all user`;
-  // }
+  findAll() {
+    return this.usersRepository.find();
+  }
   // update(id: number, updateUserDto: UpdateUserDto) {
   //   return `This action updates a #${id} user`;
   // }

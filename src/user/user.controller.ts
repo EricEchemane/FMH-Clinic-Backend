@@ -15,10 +15,10 @@ import { JwtAuthGuard } from 'src/auth/guard/jwt-auth.guard';
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  // @Get()
-  // findAll() {
-  //   return this.userService.findAll();
-  // }
+  @Get()
+  findAll() {
+    return this.userService.findAll();
+  }
 
   @Get(':email')
   findOne(@Param('email') email: string) {
