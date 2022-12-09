@@ -17,9 +17,9 @@ export class ProductService {
     return newProduct;
   }
 
-  // findAll() {
-  //   return `This action returns all product`;
-  // }
+  findAll() {
+    return this.productsRepository.find();
+  }
 
   // findOne(id: number) {
   //   return `This action returns a #${id} product`;
