@@ -6,7 +6,7 @@ import {
 import { InjectRepository } from '@nestjs/typeorm';
 import { ProductService } from 'src/product/product.service';
 import { QueryFailedError, Repository } from 'typeorm';
-import { CreatePurchaseDto } from './dto';
+import { CreatePurchaseDto, UpdatePurchaseDto } from './dto';
 import { Purchase } from './entities';
 
 @Injectable()
@@ -49,11 +49,10 @@ export class PurchaseService {
     }
   }
 
-  // update(id: number, updatePurchaseDto: UpdatePurchaseDto) {
-  //   return `This action updates a #${id} purchase`;
-  // }
-
-  // remove(id: number) {
-  //   return `This action removes a #${id} purchase`;
-  // }
+  async update(id: string, dto: UpdatePurchaseDto) {
+    let purchase = await this.findOne(id);
+    purchase = { ...purchase, ...dto };
+    purchase = await this.purchasesRepository.save(purchase);
+    return purchase;
+  }
 }

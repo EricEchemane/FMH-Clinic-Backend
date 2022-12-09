@@ -1,6 +1,14 @@
-import { Controller, Post, Body, Get, UseGuards, Param } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  Get,
+  UseGuards,
+  Param,
+  Patch,
+} from '@nestjs/common';
 import { PurchaseService } from './purchase.service';
-import { CreatePurchaseDto } from './dto';
+import { CreatePurchaseDto, UpdatePurchaseDto } from './dto';
 import { JwtAuthGuard } from 'src/auth/guard/jwt-auth.guard';
 
 @UseGuards(JwtAuthGuard)
@@ -23,16 +31,11 @@ export class PurchaseController {
     return this.purchaseService.findOne(id);
   }
 
-  // @Patch(':id')
-  // update(
-  //   @Param('id') id: string,
-  //   @Body() updatePurchaseDto: UpdatePurchaseDto,
-  // ) {
-  //   return this.purchaseService.update(+id, updatePurchaseDto);
-  // }
-
-  // @Delete(':id')
-  // remove(@Param('id') id: string) {
-  //   return this.purchaseService.remove(+id);
-  // }
+  @Patch(':id')
+  update(
+    @Param('id') id: string,
+    @Body() updatePurchaseDto: UpdatePurchaseDto,
+  ) {
+    return this.purchaseService.update(id, updatePurchaseDto);
+  }
 }
