@@ -46,6 +46,11 @@ export class SchedulingController {
     return this.schedulingService.findOneBy({ id });
   }
 
+  @Get('schedules/from-this-month-and-next')
+  getSchedulesFromThisMonthAndNext() {
+    return this.schedulingService.getSchedulesFromThisMonthAndNext();
+  }
+
   @Get('schedules/:date')
   getSchedulesOn(@Param('date') date: string) {
     return this.schedulingService.getSchedulesOn(new Date(date));

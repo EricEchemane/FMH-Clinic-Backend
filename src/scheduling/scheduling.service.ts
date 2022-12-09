@@ -6,7 +6,7 @@ import {
 import { FindOneByFilter } from './types/find-one-filter.type';
 import { InjectRepository } from '@nestjs/typeorm';
 import { RequestUser } from 'src/user/decorators/get-user.decorator';
-import { QueryFailedError, Repository } from 'typeorm';
+import { QueryFailedError, Repository, Between } from 'typeorm';
 import { CreateScheduleDto, UpdateScheduleDto } from './dto';
 import { Schedule } from './entities';
 
@@ -74,6 +74,26 @@ export class SchedulingService {
       }
       // QueryFailedError: invalid input syntax for type date:
     }
+  }
+
+  async getSchedulesFromThisMonthAndNext() {
+    let currentYear = new Date().getFullYear();
+    const currentMonth = new Date().getMonth();
+    let nextMonth = 1;
+    if (currentMonth === 12) {
+      currentYear++;
+    } else {
+      nextMonth = currentMonth + 1;
+    }
+    const schdules = await this.schedulesRepository.find({
+      where: {
+        date: Between(
+          new Date(currentYear, currentMonth, 1),
+          new Date(currentYear, nextMonth, 28),
+        ),
+      },
+    });
+    return schdules;
   }
 
   // remove(id: number) {
