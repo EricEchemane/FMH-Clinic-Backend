@@ -1,9 +1,9 @@
 import {
-  IsBoolean,
   IsInt,
   IsNotEmpty,
   IsNumber,
   IsString,
+  IsUrl,
   Min,
 } from 'class-validator';
 
@@ -25,9 +25,6 @@ export class CreateProductDto {
   stock: number;
 
   @IsString()
-  @IsNotEmpty()
+  @IsUrl()
   image_url: string;
-
-  @IsBoolean()
-  archived: boolean;
 }
