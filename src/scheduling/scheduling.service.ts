@@ -1,5 +1,9 @@
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { FindOneByFilter } from './types/find-one-filter.type';
-import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { RequestUser } from 'src/user/decorators/get-user.decorator';
 import { QueryFailedError, Repository } from 'typeorm';
@@ -54,9 +58,23 @@ export class SchedulingService {
     return schedule;
   }
 
-  // async getSchedulesOn(date: Date) {
-  // const searchFilter = { date:  };
-  // }
+  async getSchedulesOn(date: Date) {
+    try {
+      const schedules = await this.schedulesRepository.findBy({ date });
+      return {
+        schedules,
+        count: schedules.length,
+      };
+    } catch (error) {
+      if (
+        error instanceof QueryFailedError &&
+        error.message.startsWith('invalid input syntax for type date:')
+      ) {
+        throw new BadRequestException('invalid date format');
+      }
+      // QueryFailedError: invalid input syntax for type date:
+    }
+  }
 
   // remove(id: number) {
   //   return `This action removes a #${id} scheduling`;
