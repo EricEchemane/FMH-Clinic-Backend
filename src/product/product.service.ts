@@ -5,7 +5,7 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, QueryFailedError } from 'typeorm';
-import { CreateProductDto } from './dto';
+import { CreateProductDto, UpdateProductDto } from './dto';
 import { Product } from './entities';
 
 @Injectable()
@@ -41,9 +41,12 @@ export class ProductService {
     }
   }
 
-  // update(id: number, updateProductDto: UpdateProductDto) {
-  //   return `This action updates a #${id} product`;
-  // }
+  async update(id: string, updateProductDto: UpdateProductDto) {
+    let product = await this.findOne(id);
+    product = { ...product, ...updateProductDto };
+    product = await this.productsRepository.save(product);
+    return product;
+  }
 
   // remove(id: number) {
   //   return `This action removes a #${id} product`;
