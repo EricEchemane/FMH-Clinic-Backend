@@ -1,3 +1,6 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const nodemailer = require('nodemailer');
+import { ConfigService } from '@nestjs/config';
 import {
   BadRequestException,
   Injectable,
@@ -15,6 +18,7 @@ export class SchedulingService {
   constructor(
     @InjectRepository(Schedule)
     private schedulesRepository: Repository<Schedule>,
+    private configService: ConfigService,
   ) {}
 
   async create(createScheduleDto: CreateScheduleDto, user: RequestUser) {
@@ -24,6 +28,26 @@ export class SchedulingService {
       email: user.email,
       iso_date: new Date(createScheduleDto.date).toDateString(),
     });
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: this.configService.get('GMAILSENDER'),
+        pass: this.configService.get('GOOGLEPASSWORD'),
+      },
+    });
+
+    const mailConfig = {
+      from: 'FMH Clinic',
+      to: user.email,
+      subject: `FMH Animal Clinic Appointment`,
+      html: `
+        <h1> Hello, ${createScheduleDto.name}. Thank your for booking an appointment with us! Please proceed to our clinic on the date you had chosen. </h1>
+
+        <div> Thank You! </div>
+      `,
+    };
+
+    await transporter.sendMail(mailConfig);
     return newEntry;
   }
 
@@ -35,7 +59,7 @@ export class SchedulingService {
     try {
       const schedule = await this.schedulesRepository.findOneBy(filter);
       if (!schedule) {
-        throw new NotFoundException('schdule not found');
+        throw new NotFoundException('schedule not found');
       }
       return schedule;
     } catch (error) {

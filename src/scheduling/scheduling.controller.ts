@@ -31,24 +31,18 @@ export class SchedulingController {
   }
 
   @Get()
-  findAll(@GetUser() user: RequestUser) {
-    // restrict to customers
-    if (user.role === UserRole.customer) {
-      throw new UnauthorizedException(
-        'You are not allowed to to access this route',
-      );
-    }
+  findAll() {
     return this.schedulingService.findAll();
+  }
+
+  @Get('from-this-month-and-next')
+  getSchedulesFromThisMonthAndNext() {
+    return this.schedulingService.getSchedulesFromThisMonthAndNext();
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.schedulingService.findOneBy({ id });
-  }
-
-  @Get('schedules/from-this-month-and-next')
-  getSchedulesFromThisMonthAndNext() {
-    return this.schedulingService.getSchedulesFromThisMonthAndNext();
   }
 
   @Get('schedules/:date')

@@ -23,6 +23,5 @@ export class CreateScheduleDto {
   service: PetServices;
 
   @IsString()
-  @IsNotEmpty()
   concern: string;
 }
