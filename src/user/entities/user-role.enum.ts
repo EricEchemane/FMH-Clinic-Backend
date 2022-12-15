@@ -4,4 +4,5 @@ export enum UserRole {
   staff = 'staff',
   super_admin = 'super_admin',
   customer = 'customer',
+  pending = 'pending',
 }
