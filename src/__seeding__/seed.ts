@@ -1,8 +1,9 @@
+import { Schedule } from '../scheduling/entities';
 import 'reflect-metadata';
 import { User } from '../user/entities';
 import { DataSource, DataSourceOptions } from 'typeorm';
 import { runSeeders, SeederOptions } from 'typeorm-extension';
-import { UsersFactory } from './factories';
+import { schedulesFactory, UsersFactory } from './factories';
 import MainSeeder from './main.seeder';
 
 const options: DataSourceOptions & SeederOptions = {
@@ -12,8 +13,8 @@ const options: DataSourceOptions & SeederOptions = {
   username: 'postgres',
   password: '19126222',
   database: 'test',
-  entities: [User],
-  factories: [UsersFactory],
+  entities: [User, Schedule],
+  factories: [UsersFactory, schedulesFactory],
   seeds: [MainSeeder],
 };
 
