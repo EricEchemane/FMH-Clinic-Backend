@@ -1,5 +1,5 @@
 .env.prod
-
+src/__seeding__/preview.ts
 # compiled output
 /dist
 /node_modules

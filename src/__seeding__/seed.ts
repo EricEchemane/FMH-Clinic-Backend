@@ -5,8 +5,9 @@ import { DataSource, DataSourceOptions } from 'typeorm';
 import { runSeeders, SeederOptions } from 'typeorm-extension';
 import { schedulesFactory, UsersFactory } from './factories';
 import MainSeeder from './main.seeder';
+import { preview } from './preview';
 
-const options: DataSourceOptions & SeederOptions = {
+const local: DataSourceOptions & SeederOptions = {
   type: 'postgres',
   host: 'localhost',
   port: 5432,
@@ -17,6 +18,8 @@ const options: DataSourceOptions & SeederOptions = {
   factories: [UsersFactory, schedulesFactory],
   seeds: [MainSeeder],
 };
+
+const options = process.env.NODE_ENV === 'preview_seed' ? preview : local;
 
 const dataSource = new DataSource(options);
 
