@@ -1,11 +1,12 @@
-import { Schedule } from '../scheduling/entities';
 import 'reflect-metadata';
-import { User } from '../user/entities';
+import { Schedule } from '../scheduling/entities';
 import { DataSource, DataSourceOptions } from 'typeorm';
 import { runSeeders, SeederOptions } from 'typeorm-extension';
-import { schedulesFactory, UsersFactory } from './factories';
+import { ProductsFactory, schedulesFactory, UsersFactory } from './factories';
 import MainSeeder from './main.seeder';
+import { User } from '../user/entities';
 import { preview } from './preview';
+import { Product } from '../product/entities';
 
 const local: DataSourceOptions & SeederOptions = {
   type: 'postgres',
@@ -14,8 +15,8 @@ const local: DataSourceOptions & SeederOptions = {
   username: 'postgres',
   password: '19126222',
   database: 'fmh_clinic',
-  entities: [User, Schedule],
-  factories: [UsersFactory, schedulesFactory],
+  entities: [User, Schedule, Product],
+  factories: [UsersFactory, schedulesFactory, ProductsFactory],
   seeds: [MainSeeder],
 };
 
