@@ -12,7 +12,7 @@ const options: DataSourceOptions & SeederOptions = {
   port: 5432,
   username: 'postgres',
   password: '19126222',
-  database: 'test',
+  database: 'fmh_clinic',
   entities: [User, Schedule],
   factories: [UsersFactory, schedulesFactory],
   seeds: [MainSeeder],

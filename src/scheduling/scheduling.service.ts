@@ -52,7 +52,9 @@ export class SchedulingService {
   }
 
   findAll() {
-    return this.schedulesRepository.find();
+    return this.schedulesRepository.find({
+      where: { archived: false },
+    });
   }
 
   async findOneBy(filter: FindOneByFilter) {

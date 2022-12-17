@@ -14,10 +14,10 @@ export default class MainSeeder implements Seeder {
     const userFactory = factoryManager.get(User);
     const scheduleFactory = factoryManager.get(Schedule);
 
-    const users = await userFactory.saveMany(10);
+    const users = await userFactory.saveMany(30);
 
     const schedules = await Promise.all(
-      Array(10)
+      Array(50)
         .fill('')
         .map(async () => {
           const schedule = await scheduleFactory.make({
