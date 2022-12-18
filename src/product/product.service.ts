@@ -49,7 +49,7 @@ export class ProductService {
 
     const uploadResponse = await this.cloudinary.uploadImage(
       updateProductDto.image_url,
-      product.name,
+      product.id,
     );
 
     product.image_url = uploadResponse.secure_url;
