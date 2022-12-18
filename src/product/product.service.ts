@@ -4,6 +4,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
 import { Repository, QueryFailedError } from 'typeorm';
 import { CreateProductDto, UpdateProductDto } from './dto';
 import { Product } from './entities';
@@ -13,6 +14,7 @@ export class ProductService {
   constructor(
     @InjectRepository(Product)
     private productsRepository: Repository<Product>,
+    private cloudinary: CloudinaryService,
   ) {}
 
   async create(createProductDto: CreateProductDto) {
@@ -44,6 +46,13 @@ export class ProductService {
   async update(id: string, updateProductDto: UpdateProductDto) {
     let product = await this.findOne(id);
     product = { ...product, ...updateProductDto };
+
+    const uploadResponse = await this.cloudinary.uploadImage(
+      updateProductDto.image_url,
+    );
+
+    product.image_url = uploadResponse.secure_url;
+
     product = await this.productsRepository.save(product);
     return product;
   }
