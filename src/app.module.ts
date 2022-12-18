@@ -9,6 +9,7 @@ import { PasswordResetModule } from './password-reset/password-reset.module';
 import { SchedulingModule } from './scheduling/scheduling.module';
 import { ProductModule } from './product/product.module';
 import { PurchaseModule } from './purchase/purchase.module';
+import { CloudinaryModule } from './cloudinary/cloudinary.module';
 import typeormConfig from './config/typeorm';
 import getEnvPath from './config/get-env-path';
 
@@ -25,6 +26,7 @@ import getEnvPath from './config/get-env-path';
     SchedulingModule,
     ProductModule,
     PurchaseModule,
+    CloudinaryModule,
   ],
   controllers: [AppController],
   providers: [AppService],
