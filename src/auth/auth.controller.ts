@@ -1,8 +1,8 @@
 import { CreateUserDto, SigninUserDto } from './../user/dto';
 import { AuthService } from './auth.service';
-import { Body, Controller, Post } from '@nestjs/common';
-import { AccessToken } from './types';
+import { Body, Controller, Post, Res } from '@nestjs/common';
 import { UserService } from 'src/user/user.service';
+import { Response } from 'express';
 
 @Controller('auth')
 export class AuthController {
@@ -12,10 +12,17 @@ export class AuthController {
   ) {}
 
   @Post('signin')
-  async signin(@Body() dto: SigninUserDto): Promise<AccessToken> {
+  async signin(
+    @Body() dto: SigninUserDto,
+    @Res({ passthrough: true }) res: Response,
+  ) {
     const user = await this.authService.validateUser(dto.email, dto.password);
     const payload = { sub: user.id, email: user.email, role: user.role };
-    return this.authService.generateAccessToken(payload);
+    const token = this.authService.generateAccessToken(payload);
+
+    res.cookie('token', { token }, { httpOnly: true });
+
+    return { message: 'success' };
   }
 
   @Post('signup')

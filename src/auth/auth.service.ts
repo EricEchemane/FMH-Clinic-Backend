@@ -2,7 +2,7 @@ import { JwtService } from '@nestjs/jwt';
 import { Injectable, ForbiddenException } from '@nestjs/common';
 import { UserService } from 'src/user/user.service';
 import * as argon from 'argon2';
-import { AccessToken, JwtPayload } from './types';
+import { JwtPayload } from './types';
 
 @Injectable()
 export class AuthService {
@@ -18,8 +18,7 @@ export class AuthService {
     return user;
   }
 
-  generateAccessToken(payload: JwtPayload): AccessToken {
-    const access_token = this.jwt.sign(payload);
-    return { access_token };
+  generateAccessToken(payload: JwtPayload) {
+    return this.jwt.sign(payload);
   }
 }
