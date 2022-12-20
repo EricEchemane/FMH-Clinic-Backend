@@ -1,6 +1,6 @@
 import { CreateUserDto, SigninUserDto } from './../user/dto';
 import { AuthService } from './auth.service';
-import { Body, Controller, Post, Res } from '@nestjs/common';
+import { Body, Controller, Get, Post, Res } from '@nestjs/common';
 import { UserService } from 'src/user/user.service';
 import { Response } from 'express';
 
@@ -30,5 +30,11 @@ export class AuthController {
     const user = await this.userService.create(dto);
     const payload = { sub: user.id, email: user.email, role: user.role };
     return this.authService.generateAccessToken(payload);
+  }
+
+  @Get('signout')
+  async signout(@Res({ passthrough: true }) res: Response) {
+    res.cookie('token', '', { expires: new Date() });
+    return { message: 'signed out' };
   }
 }
