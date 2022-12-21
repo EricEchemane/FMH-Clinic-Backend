@@ -20,7 +20,7 @@ export class AuthController {
     const payload = { sub: user.id, email: user.email, role: user.role };
     const token = this.authService.generateAccessToken(payload);
 
-    res.cookie('token', { token }, { httpOnly: true });
+    res.cookie('token', token, { httpOnly: true });
 
     return { message: 'success' };
   }
