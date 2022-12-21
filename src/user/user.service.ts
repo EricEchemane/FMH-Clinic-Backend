@@ -5,7 +5,7 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { QueryFailedError, Repository } from 'typeorm';
-import { CreateUserDto } from './dto';
+import { CreateUserDto, UpdateUserDto } from './dto';
 import { User } from './entities';
 import * as argon from 'argon2';
 
@@ -60,9 +60,13 @@ export class UserService {
   findAll() {
     return this.usersRepository.find();
   }
-  // update(id: number, updateUserDto: UpdateUserDto) {
-  //   return `This action updates a #${id} user`;
-  // }
+  async update(id: string, updateUserDto: UpdateUserDto) {
+    let user = await this.usersRepository.findOneBy({ id });
+    user = { ...user, prefer_color_scheme: updateUserDto.prefer_color_scheme };
+
+    user = await this.usersRepository.save(user);
+    return user;
+  }
   // remove(id: number) {
   //   return `This action removes a #${id} user`;
   // }

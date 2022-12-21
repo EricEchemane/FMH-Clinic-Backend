@@ -17,7 +17,12 @@ export class AuthController {
     @Res({ passthrough: true }) res: Response,
   ) {
     const user = await this.authService.validateUser(dto.email, dto.password);
-    const payload = { sub: user.id, email: user.email, role: user.role };
+    const payload = {
+      sub: user.id,
+      email: user.email,
+      role: user.role,
+      prefer_color_scheme: user.prefer_color_scheme,
+    };
     const token = this.authService.generateAccessToken(payload);
 
     res.cookie('token', token, { httpOnly: true });
@@ -28,8 +33,10 @@ export class AuthController {
   @Post('signup')
   async signup(@Body() dto: CreateUserDto) {
     const user = await this.userService.create(dto);
-    const payload = { sub: user.id, email: user.email, role: user.role };
-    return this.authService.generateAccessToken(payload);
+    if (!user) {
+      throw new Error('Unable to create user');
+    }
+    return { message: 'success' };
   }
 
   @Get('signout')

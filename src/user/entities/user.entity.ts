@@ -22,4 +22,7 @@ export class User {
   @Exclude()
   @Column()
   hash: string;
+
+  @Column({ default: 'light' })
+  prefer_color_scheme: string;
 }
