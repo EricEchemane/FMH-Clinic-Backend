@@ -4,7 +4,7 @@ export default {
   imports: [ConfigModule],
   useFactory: (configService: ConfigService) => ({
     secret: configService.get('JWTSECRET'),
-    signOptions: { expiresIn: '10s' },
+    signOptions: { expiresIn: '1h' },
   }),
   inject: [ConfigService],
 };
