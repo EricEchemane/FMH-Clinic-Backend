@@ -25,7 +25,11 @@ export class AuthController {
     };
     const token = this.authService.generateAccessToken(payload);
 
-    res.cookie('token', token, { httpOnly: true });
+    res.cookie('token', token, {
+      httpOnly: true,
+      sameSite: 'none',
+      secure: true,
+    });
 
     return { message: 'success' };
   }
