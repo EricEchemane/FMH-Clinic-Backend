@@ -10,6 +10,7 @@ import { SchedulingModule } from './scheduling/scheduling.module';
 import { ProductModule } from './product/product.module';
 import { PurchaseModule } from './purchase/purchase.module';
 import { CloudinaryModule } from './common/cloudinary/cloudinary.module';
+import { FeedbackModule } from './feedback/feedback.module';
 import typeormConfig from './common/config/typeorm';
 import getEnvPath from './common/config/get-env-path';
 
@@ -27,6 +28,7 @@ import getEnvPath from './common/config/get-env-path';
     ProductModule,
     PurchaseModule,
     CloudinaryModule,
+    FeedbackModule,
   ],
   controllers: [AppController],
   providers: [AppService],
