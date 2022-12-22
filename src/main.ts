@@ -12,6 +12,13 @@ async function bootstrap() {
   app.enableCors({
     origin: whiteList,
     credentials: true,
+    allowedHeaders: [
+      'Origin',
+      'X-Requested-With',
+      'Content-Type',
+      'Accept',
+      'Cookie',
+    ],
   });
 
   app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
