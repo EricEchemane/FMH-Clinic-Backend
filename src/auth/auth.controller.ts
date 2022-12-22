@@ -26,6 +26,10 @@ export class AuthController {
       httpOnly: true,
       secure: true,
       sameSite: 'none',
+      domain:
+        process.env.NODE_ENV === 'production'
+          ? 'fmh-animal-clinic.vercel.app'
+          : 'localhost',
     });
 
     res.json({ message: 'success' }).end();
