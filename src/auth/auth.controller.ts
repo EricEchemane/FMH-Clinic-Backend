@@ -29,6 +29,10 @@ export class AuthController {
       httpOnly: true,
       secure: true,
       sameSite: 'none',
+      domain:
+        process.env.NODE_ENV === 'production'
+          ? 'fmh.up.railway.app'
+          : 'localhost',
     });
 
     return { message: 'success' };
