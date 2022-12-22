@@ -47,7 +47,14 @@ export class AuthController {
 
   @Post('signout')
   async signout(@Res({ passthrough: true }) res: Response) {
-    res.cookie('token', '', { expires: new Date() });
+    res.cookie('token', '', {
+      expires: new Date(),
+      httpOnly: true,
+      secure: true,
+      sameSite: 'none',
+      domain:
+        process.env.NODE_ENV === 'production' ? '.railway.app' : 'localhost',
+    });
     return { message: 'signed out' };
   }
 }
