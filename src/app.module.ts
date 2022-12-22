@@ -10,8 +10,8 @@ import { SchedulingModule } from './scheduling/scheduling.module';
 import { ProductModule } from './product/product.module';
 import { PurchaseModule } from './purchase/purchase.module';
 import { CloudinaryModule } from './common/cloudinary/cloudinary.module';
-import typeormConfig from './config/typeorm';
-import getEnvPath from './config/get-env-path';
+import typeormConfig from './common/config/typeorm';
+import getEnvPath from './common/config/get-env-path';
 
 @Module({
   imports: [
