@@ -12,7 +12,10 @@ export class AuthController {
   ) {}
 
   @Post('signin')
-  async signin(@Body() dto: SigninUserDto, @Res() res: Response) {
+  async signin(
+    @Body() dto: SigninUserDto,
+    @Res({ passthrough: true }) res: Response,
+  ) {
     const user = await this.authService.validateUser(dto.email, dto.password);
     const payload = {
       sub: user.id,
@@ -28,7 +31,7 @@ export class AuthController {
       sameSite: 'none',
     });
 
-    res.json({ message: 'success' }).end();
+    return { message: 'success' };
   }
 
   @Post('signup')
