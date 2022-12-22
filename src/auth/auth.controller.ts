@@ -1,6 +1,6 @@
 import { CreateUserDto, SigninUserDto } from './../user/dto';
 import { AuthService } from './auth.service';
-import { Body, Controller, Get, Post, Res } from '@nestjs/common';
+import { Body, Controller, Post, Res } from '@nestjs/common';
 import { UserService } from 'src/user/user.service';
 import { Response } from 'express';
 
@@ -28,7 +28,6 @@ export class AuthController {
     res.cookie('token', token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
-      sameSite: false,
     });
 
     return { message: 'success' };
@@ -43,7 +42,7 @@ export class AuthController {
     return { message: 'success' };
   }
 
-  @Get('signout')
+  @Post('signout')
   async signout(@Res({ passthrough: true }) res: Response) {
     res.cookie('token', '', { expires: new Date() });
     return { message: 'signed out' };
