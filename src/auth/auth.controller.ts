@@ -30,7 +30,9 @@ export class AuthController {
       sameSite: 'none',
       secure: true,
       domain:
-        process.env.NODE_ENV === 'production' ? '.vercel.app' : 'localhost',
+        process.env.NODE_ENV === 'production'
+          ? 'fmh-animal-clinic.vercel.app'
+          : 'localhost',
     });
 
     return { message: 'success' };
