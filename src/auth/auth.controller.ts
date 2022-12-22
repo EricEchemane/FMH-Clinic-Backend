@@ -29,6 +29,8 @@ export class AuthController {
       httpOnly: true,
       sameSite: 'none',
       secure: true,
+      domain:
+        process.env.NODE_ENV === 'production' ? '.vercel.app' : 'localhost',
     });
 
     return { message: 'success' };
