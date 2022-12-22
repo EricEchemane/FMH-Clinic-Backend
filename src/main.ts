@@ -12,7 +12,6 @@ async function bootstrap() {
   app.enableCors({
     origin: whiteList,
     credentials: true,
-    exposedHeaders: ['Set-Cookie', 'X-Set-Cookie'],
   });
 
   app.useGlobalPipes(new ValidationPipe({ whitelist: true }));

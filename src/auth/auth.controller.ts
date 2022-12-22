@@ -26,6 +26,7 @@ export class AuthController {
       httpOnly: true,
       secure: true,
       sameSite: 'none',
+      domain: '.vercel.app',
     });
 
     res.json({ message: 'success' }).end();
