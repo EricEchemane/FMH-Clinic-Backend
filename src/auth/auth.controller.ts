@@ -12,10 +12,7 @@ export class AuthController {
   ) {}
 
   @Post('signin')
-  async signin(
-    @Body() dto: SigninUserDto,
-    @Res({ passthrough: true }) res: Response,
-  ) {
+  async signin(@Body() dto: SigninUserDto, @Res() res: Response) {
     const user = await this.authService.validateUser(dto.email, dto.password);
     const payload = {
       sub: user.id,
@@ -27,11 +24,11 @@ export class AuthController {
 
     res.cookie('token', token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
+      secure: true,
       sameSite: 'none',
     });
 
-    return { message: 'success' };
+    res.json({ message: 'success' }).end();
   }
 
   @Post('signup')
