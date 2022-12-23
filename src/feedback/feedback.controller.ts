@@ -5,7 +5,6 @@ import {
   Body,
   Patch,
   Param,
-  Delete,
   UseGuards,
   ClassSerializerInterceptor,
   UseInterceptors,
@@ -45,11 +44,11 @@ export class FeedbackController {
     @Param('id') id: string,
     @Body() updateFeedbackDto: UpdateFeedbackDto,
   ) {
-    return this.feedbackService.update(+id, updateFeedbackDto);
+    return this.feedbackService.update(id, updateFeedbackDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.feedbackService.remove(+id);
-  }
+  //@Delete(':id')
+  //remove(@Param('id') id: string) {
+  //  return this.feedbackService.remove(+id);
+  //}
 }

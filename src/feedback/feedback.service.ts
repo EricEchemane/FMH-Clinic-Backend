@@ -32,11 +32,16 @@ export class FeedbackService {
     });
   }
 
-  update(id: number, updateFeedbackDto: UpdateFeedbackDto) {
-    return `This action updates a #${id} feedback`;
+  async update(id: string, updateFeedbackDto: UpdateFeedbackDto) {
+    const feedback = await this.feedbackRepository.findOne({
+      where: { id },
+      relations: ['user'],
+    });
+    this.feedbackRepository.merge(feedback, updateFeedbackDto);
+    return this.feedbackRepository.save(feedback);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} feedback`;
-  }
+  //remove(id: number) {
+  //  return `This action removes a #${id} feedback`;
+  //}
 }
