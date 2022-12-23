@@ -29,7 +29,7 @@ export class ServiceService {
     return this.serviceRepository.save(service);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} service`;
+  remove(id: string) {
+    return this.serviceRepository.delete({ id });
   }
 }
