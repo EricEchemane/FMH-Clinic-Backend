@@ -33,6 +33,11 @@ export class ProductController {
     return this.productService.findOne(id);
   }
 
+  @Patch('/toggle-archive/:id')
+  toggleArchived(@Param('id') id: string) {
+    return this.productService.toggleArchived(id);
+  }
+
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateProductDto: UpdateProductDto) {
     return this.productService.update(id, updateProductDto);

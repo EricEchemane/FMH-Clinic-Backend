@@ -58,6 +58,15 @@ export class ProductService {
     return product;
   }
 
+  async toggleArchived(id: string) {
+    let product = await this.findOne(id);
+
+    product.archived = !product.archived;
+
+    product = await this.productsRepository.save(product);
+    return product;
+  }
+
   async remove(id: string) {
     const product = await this.findOne(id);
     await this.productsRepository.remove(product);
