@@ -16,7 +16,7 @@ export class ServiceService {
   }
 
   findAll() {
-    return `This action returns all service`;
+    return this.serviceRepository.find();
   }
 
   findOne(id: number) {
