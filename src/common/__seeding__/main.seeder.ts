@@ -5,6 +5,8 @@ import { Seeder, SeederFactoryManager } from 'typeorm-extension';
 import { faker } from '@faker-js/faker';
 import { Product } from '../../product/entities';
 import { Feedback } from '../../feedback/entities';
+import services from './contants/services';
+import { Service } from '../../service/entities';
 
 export default class MainSeeder implements Seeder {
   public async run(
@@ -13,6 +15,7 @@ export default class MainSeeder implements Seeder {
   ): Promise<any> {
     const schedulesRepository = dataSource.getRepository(Schedule);
     const feedbacksRepository = dataSource.getRepository(Feedback);
+    const servicesRepository = dataSource.getRepository(Service);
 
     const userFactory = factoryManager.get(User);
     const scheduleFactory = factoryManager.get(Schedule);
@@ -46,5 +49,11 @@ export default class MainSeeder implements Seeder {
         }),
     );
     await feedbacksRepository.save(feedbacks);
+
+    await Promise.all(
+      services.map(async (service) => {
+        await servicesRepository.save(service);
+      }),
+    );
   }
 }

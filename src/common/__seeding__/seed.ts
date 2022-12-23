@@ -10,6 +10,7 @@ import { Schedule } from '../../scheduling/entities';
 import { User } from '../../user/entities';
 import { Product } from '../../product/entities';
 import { FeedbackFactory } from './factories/feedback.factory';
+import { Service } from '../../service/entities';
 
 const local: DataSourceOptions & SeederOptions = {
   type: 'postgres',
@@ -18,7 +19,7 @@ const local: DataSourceOptions & SeederOptions = {
   username: 'postgres',
   password: '19126222',
   database: 'fmh_clinic',
-  entities: [User, Schedule, Product, Feedback],
+  entities: [User, Schedule, Product, Feedback, Service],
   factories: [UsersFactory, schedulesFactory, ProductsFactory, FeedbackFactory],
   seeds: [MainSeeder],
 };
