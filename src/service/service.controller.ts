@@ -32,7 +32,7 @@ export class ServiceController {
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateServiceDto: UpdateServiceDto) {
-    return this.serviceService.update(+id, updateServiceDto);
+    return this.serviceService.update(id, updateServiceDto);
   }
 
   @Delete(':id')

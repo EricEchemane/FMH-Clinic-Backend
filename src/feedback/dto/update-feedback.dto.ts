@@ -1,4 +1,4 @@
-import { PartialType } from '@nestjs/swagger';
+import { PartialType } from '@nestjs/mapped-types';
 import { IsBoolean } from 'class-validator';
 
 class CreateFeedbackDto {

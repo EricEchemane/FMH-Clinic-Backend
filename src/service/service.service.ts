@@ -23,8 +23,10 @@ export class ServiceService {
     return this.serviceRepository.findOneBy({ id });
   }
 
-  update(id: number, updateServiceDto: UpdateServiceDto) {
-    return `This action updates a #${id} service`;
+  async update(id: string, updateServiceDto: UpdateServiceDto) {
+    const service = await this.serviceRepository.findOneBy({ id });
+    this.serviceRepository.merge(service, updateServiceDto);
+    return this.serviceRepository.save(service);
   }
 
   remove(id: number) {
