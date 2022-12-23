@@ -25,6 +25,12 @@ export class FeedbackService {
     });
   }
 
+  findAllByUserId(userId: string) {
+    return this.feedbackRepository.find({
+      where: { user: { id: userId } },
+    });
+  }
+
   findOne(id: string) {
     return this.feedbackRepository.findOne({
       where: { id },
