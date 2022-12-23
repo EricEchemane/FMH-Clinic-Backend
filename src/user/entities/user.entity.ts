@@ -1,5 +1,5 @@
 import { Exclude } from 'class-transformer';
-import { Feedback } from 'src/feedback/entities';
+import { Feedback } from '../../feedback/entities';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { UserRole } from './user-role.enum';
 
