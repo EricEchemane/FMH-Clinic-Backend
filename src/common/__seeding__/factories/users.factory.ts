@@ -7,7 +7,11 @@ export const UsersFactory = setSeederFactory(User, async (faker: Faker) => {
   const user = new User();
   user.email = faker.internet.email();
   user.name = `${faker.name.firstName()} ${faker.name.lastName()}`;
-  user.role = UserRole.customer;
+  user.role = faker.helpers.arrayElement([
+    UserRole.customer,
+    UserRole.pending,
+    UserRole.staff,
+  ]);
   user.hash = await argon.hash('password');
   return user;
 });
