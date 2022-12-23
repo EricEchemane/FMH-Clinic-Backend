@@ -25,6 +25,13 @@ export class FeedbackService {
     });
   }
 
+  findAllPublished() {
+    return this.feedbackRepository.find({
+      where: { is_published: true },
+      relations: ['user'],
+    });
+  }
+
   findAllByUserId(userId: string) {
     return this.feedbackRepository.find({
       where: { user: { id: userId } },

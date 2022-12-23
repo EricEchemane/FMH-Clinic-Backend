@@ -34,6 +34,11 @@ export class FeedbackController {
     return this.feedbackService.findAll();
   }
 
+  @Get('/public')
+  findAllPublished() {
+    return this.feedbackService.findAllPublished();
+  }
+
   @Get('/user/:id')
   findAllByUserId(@Param('id') id: string) {
     return this.feedbackService.findAllByUserId(id);
