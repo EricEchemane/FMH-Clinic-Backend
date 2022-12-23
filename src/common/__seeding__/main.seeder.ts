@@ -1,9 +1,9 @@
-import { Schedule } from '../scheduling/entities';
-import { User } from '../user/entities';
+import { Schedule } from '../../scheduling/entities';
+import { User } from '../../user/entities';
 import { DataSource } from 'typeorm';
 import { Seeder, SeederFactoryManager } from 'typeorm-extension';
 import { faker } from '@faker-js/faker';
-import { Product } from '../product/entities';
+import { Product } from '../../product/entities';
 
 export default class MainSeeder implements Seeder {
   public async run(

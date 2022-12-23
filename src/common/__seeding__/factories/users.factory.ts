@@ -1,5 +1,5 @@
 import { Faker } from '@faker-js/faker';
-import { User, UserRole } from '../../user/entities';
+import { User, UserRole } from '../../../user/entities';
 import { setSeederFactory } from 'typeorm-extension';
 import * as argon from 'argon2';
 
