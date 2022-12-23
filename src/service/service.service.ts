@@ -19,8 +19,8 @@ export class ServiceService {
     return this.serviceRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} service`;
+  findOne(id: string) {
+    return this.serviceRepository.findOneBy({ id });
   }
 
   update(id: number, updateServiceDto: UpdateServiceDto) {
