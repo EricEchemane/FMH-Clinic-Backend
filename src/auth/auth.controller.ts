@@ -1,10 +1,18 @@
 import { CreateUserDto, SigninUserDto } from './../user/dto';
 import { AuthService } from './auth.service';
-import { Body, Controller, Post, Res } from '@nestjs/common';
+import {
+  Body,
+  ClassSerializerInterceptor,
+  Controller,
+  Post,
+  Res,
+  UseInterceptors,
+} from '@nestjs/common';
 import { UserService } from 'src/user/user.service';
 import { Response } from 'express';
 
 @Controller('auth')
+@UseInterceptors(ClassSerializerInterceptor)
 export class AuthController {
   constructor(
     private authService: AuthService,
@@ -33,7 +41,7 @@ export class AuthController {
         process.env.NODE_ENV === 'production' ? '.railway.app' : 'localhost',
     });
 
-    return { message: 'success' };
+    return user;
   }
 
   @Post('signup')
