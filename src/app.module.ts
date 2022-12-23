@@ -11,6 +11,7 @@ import { ProductModule } from './product/product.module';
 import { PurchaseModule } from './purchase/purchase.module';
 import { CloudinaryModule } from './common/cloudinary/cloudinary.module';
 import { FeedbackModule } from './feedback/feedback.module';
+import { ServiceModule } from './service/service.module';
 import typeormConfig from './common/config/typeorm';
 import getEnvPath from './common/config/get-env-path';
 
@@ -29,6 +30,7 @@ import getEnvPath from './common/config/get-env-path';
     PurchaseModule,
     CloudinaryModule,
     FeedbackModule,
+    ServiceModule,
   ],
   controllers: [AppController],
   providers: [AppService],
