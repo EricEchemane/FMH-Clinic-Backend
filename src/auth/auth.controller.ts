@@ -36,6 +36,9 @@ export class AuthController {
     res.cookie('token', token, {
       httpOnly: true,
       secure: true,
+      sameSite: 'none',
+      domain:
+        process.env.NODE_ENV === 'production' ? '.railway.app' : 'localhost',
     });
 
     return user;
