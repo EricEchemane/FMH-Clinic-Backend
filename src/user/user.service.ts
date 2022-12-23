@@ -61,11 +61,9 @@ export class UserService {
     return this.usersRepository.find();
   }
   async update(id: string, updateUserDto: UpdateUserDto) {
-    let user = await this.usersRepository.findOneBy({ id });
-    user = { ...user, prefer_color_scheme: updateUserDto.prefer_color_scheme };
-
-    user = await this.usersRepository.save(user);
-    return user;
+    const user = await this.usersRepository.findOneBy({ id });
+    this.usersRepository.merge(user, updateUserDto);
+    return this.usersRepository.save(user);
   }
   // remove(id: number) {
   //   return `This action removes a #${id} user`;
