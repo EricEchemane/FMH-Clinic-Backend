@@ -7,6 +7,8 @@ import {
   Param,
   Delete,
   UseGuards,
+  ClassSerializerInterceptor,
+  UseInterceptors,
 } from '@nestjs/common';
 import { FeedbackService } from './feedback.service';
 import { CreateFeedbackDto } from './dto/create-feedback.dto';
@@ -15,6 +17,7 @@ import { JwtAuthGuard } from 'src/auth/guard/jwt-auth.guard';
 import { GetUser, RequestUser } from 'src/user/decorators/get-user.decorator';
 
 @UseGuards(JwtAuthGuard)
+@UseInterceptors(ClassSerializerInterceptor)
 @Controller('feedback')
 export class FeedbackController {
   constructor(private readonly feedbackService: FeedbackService) {}
@@ -34,7 +37,7 @@ export class FeedbackController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.feedbackService.findOne(+id);
+    return this.feedbackService.findOne(id);
   }
 
   @Patch(':id')

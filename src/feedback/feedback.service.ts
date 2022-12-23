@@ -16,16 +16,20 @@ export class FeedbackService {
   async create(createFeedbackDto: CreateFeedbackDto, userId: string) {
     const feedback = this.feedbackRepository.create(createFeedbackDto);
     feedback.user = await this.userService.findOneById(userId);
-    delete feedback.user.hash;
     return this.feedbackRepository.save(feedback);
   }
 
   findAll() {
-    return this.feedbackRepository.find();
+    return this.feedbackRepository.find({
+      relations: ['user'],
+    });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} feedback`;
+  findOne(id: string) {
+    return this.feedbackRepository.findOne({
+      where: { id },
+      relations: ['user'],
+    });
   }
 
   update(id: number, updateFeedbackDto: UpdateFeedbackDto) {
