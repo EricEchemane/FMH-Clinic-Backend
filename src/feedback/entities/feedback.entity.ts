@@ -3,6 +3,7 @@ import {
   Column,
   Entity,
   JoinColumn,
+  ManyToOne,
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
@@ -21,7 +22,7 @@ export class Feedback {
   @Column({ default: false })
   is_published: boolean;
 
-  @OneToOne(() => User)
+  @ManyToOne(() => User, (user) => user.feedbacks)
   @JoinColumn()
   user: User;
 }

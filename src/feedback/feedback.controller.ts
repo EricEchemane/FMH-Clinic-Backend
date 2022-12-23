@@ -6,18 +6,25 @@ import {
   Patch,
   Param,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
 import { FeedbackService } from './feedback.service';
 import { CreateFeedbackDto } from './dto/create-feedback.dto';
 import { UpdateFeedbackDto } from './dto/update-feedback.dto';
+import { JwtAuthGuard } from 'src/auth/guard/jwt-auth.guard';
+import { GetUser, RequestUser } from 'src/user/decorators/get-user.decorator';
 
+@UseGuards(JwtAuthGuard)
 @Controller('feedback')
 export class FeedbackController {
   constructor(private readonly feedbackService: FeedbackService) {}
 
   @Post()
-  create(@Body() createFeedbackDto: CreateFeedbackDto) {
-    return this.feedbackService.create(createFeedbackDto);
+  create(
+    @Body() createFeedbackDto: CreateFeedbackDto,
+    @GetUser() user: RequestUser,
+  ) {
+    return this.feedbackService.create(createFeedbackDto, user.userId);
   }
 
   @Get()

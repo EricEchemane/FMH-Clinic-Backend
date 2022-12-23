@@ -1,4 +1,4 @@
-import { IsInt, IsNotEmpty, IsString, IsUUID, Max, Min } from 'class-validator';
+import { IsInt, IsNotEmpty, IsString, Max, Min } from 'class-validator';
 
 export class CreateFeedbackDto {
   @IsInt()
@@ -9,7 +9,4 @@ export class CreateFeedbackDto {
   @IsString()
   @IsNotEmpty()
   message: string;
-
-  @IsUUID()
-  userId: string;
 }

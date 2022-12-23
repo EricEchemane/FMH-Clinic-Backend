@@ -13,8 +13,11 @@ export class FeedbackService {
     private userService: UserService,
   ) {}
 
-  create(createFeedbackDto: CreateFeedbackDto) {
-    return 'This action adds a new feedback';
+  async create(createFeedbackDto: CreateFeedbackDto, userId: string) {
+    const feedback = this.feedbackRepository.create(createFeedbackDto);
+    feedback.user = await this.userService.findOneById(userId);
+    delete feedback.user.hash;
+    return this.feedbackRepository.save(feedback);
   }
 
   findAll() {
