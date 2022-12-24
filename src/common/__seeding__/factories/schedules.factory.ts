@@ -9,7 +9,7 @@ export const schedulesFactory = setSeederFactory(
     const schedule = new Schedule();
     schedule.date = faker.date.between(
       new Date(2022, 11, 1),
-      new Date(2022, 11, 31),
+      new Date(2022, 12, 31),
     );
     schedule.pet_name = faker.name.firstName();
     schedule.service = faker.helpers.arrayElement([
