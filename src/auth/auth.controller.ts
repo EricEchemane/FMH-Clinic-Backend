@@ -37,8 +37,7 @@ export class AuthController {
       httpOnly: true,
       secure: true,
       sameSite: 'none',
-      domain:
-        process.env.NODE_ENV === 'production' ? '.onrender.com' : 'localhost',
+      domain: process.env.NODE_ENV === 'production' ? '.fly.dev' : 'localhost',
     });
 
     return user;
