@@ -38,7 +38,7 @@ export class AuthController {
       secure: true,
       sameSite: 'none',
       domain:
-        process.env.NODE_ENV === 'production' ? '.railway.app' : 'localhost',
+        process.env.NODE_ENV === 'production' ? '.onrender.com' : 'localhost',
     });
 
     return user;
