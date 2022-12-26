@@ -37,7 +37,8 @@ export class AuthController {
       httpOnly: true,
       secure: true,
       sameSite: 'none',
-      domain: process.env.NODE_ENV === 'production' ? '.fly.dev' : 'localhost',
+      domain:
+        process.env.NODE_ENV === 'production' ? '.railway.app' : 'localhost',
     });
 
     return user;
