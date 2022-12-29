@@ -8,7 +8,6 @@ import { AuthModule } from './auth/auth.module';
 import { PasswordResetModule } from './password-reset/password-reset.module';
 import { SchedulingModule } from './scheduling/scheduling.module';
 import { ProductModule } from './product/product.module';
-import { PurchaseModule } from './purchase/purchase.module';
 import { CloudinaryModule } from './common/cloudinary/cloudinary.module';
 import { FeedbackModule } from './feedback/feedback.module';
 import { ServiceModule } from './service/service.module';
@@ -27,7 +26,6 @@ import getEnvPath from './common/config/get-env-path';
     PasswordResetModule,
     SchedulingModule,
     ProductModule,
-    PurchaseModule,
     CloudinaryModule,
     FeedbackModule,
     ServiceModule,
