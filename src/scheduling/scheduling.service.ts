@@ -57,6 +57,12 @@ export class SchedulingService {
     });
   }
 
+  findAllByEmail(email: string) {
+    return this.schedulesRepository.find({
+      where: { email },
+    });
+  }
+
   async findOneBy(filter: FindOneByFilter) {
     try {
       const schedule = await this.schedulesRepository.findOneBy(filter);

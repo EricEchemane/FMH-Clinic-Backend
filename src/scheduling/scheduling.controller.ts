@@ -40,6 +40,11 @@ export class SchedulingController {
     return this.schedulingService.getSchedulesFromThisMonthAndNext();
   }
 
+  @Get('me')
+  getSchedulesOfUser(@GetUser() user: RequestUser) {
+    return this.schedulingService.findAllByEmail(user.email);
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.schedulingService.findOneBy({ id });
