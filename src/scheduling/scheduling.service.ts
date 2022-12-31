@@ -27,7 +27,7 @@ export class SchedulingService {
     newEntry = await this.schedulesRepository.save({
       ...createScheduleDto,
       email: user.email,
-      iso_date: new Date(createScheduleDto.date).toDateString(),
+      date: new Date(createScheduleDto.date).toDateString(),
     });
     const transporter = nodemailer.createTransport({
       service: 'gmail',
