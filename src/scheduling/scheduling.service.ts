@@ -23,12 +23,20 @@ export class SchedulingService {
   ) {}
 
   async create(createScheduleDto: CreateScheduleDto, user: RequestUser) {
+    const hasScheduleToday = await this.findOneBy({
+      date: new Date(createScheduleDto.date),
+    });
+    if (hasScheduleToday) {
+      throw new BadRequestException('You already have a schedule today');
+    }
+
     let newEntry = this.schedulesRepository.create(createScheduleDto);
     newEntry = await this.schedulesRepository.save({
       ...createScheduleDto,
       email: user.email,
       date: new Date(createScheduleDto.date).toDateString(),
     });
+
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
@@ -49,6 +57,7 @@ export class SchedulingService {
     };
 
     await transporter.sendMail(mailConfig);
+
     return newEntry;
   }
 
@@ -105,7 +114,6 @@ export class SchedulingService {
       ) {
         throw new BadRequestException('invalid date format');
       }
-      // QueryFailedError: invalid input syntax for type date:
     }
   }
 
