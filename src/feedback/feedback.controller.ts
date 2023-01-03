@@ -15,12 +15,12 @@ import { UpdateFeedbackDto } from './dto/update-feedback.dto';
 import { JwtAuthGuard } from 'src/auth/guard/jwt-auth.guard';
 import { GetUser, RequestUser } from 'src/user/decorators/get-user.decorator';
 
-@UseGuards(JwtAuthGuard)
 @UseInterceptors(ClassSerializerInterceptor)
 @Controller('feedback')
 export class FeedbackController {
   constructor(private readonly feedbackService: FeedbackService) {}
 
+  @UseGuards(JwtAuthGuard)
   @Post()
   create(
     @Body() createFeedbackDto: CreateFeedbackDto,
@@ -49,6 +49,7 @@ export class FeedbackController {
     return this.feedbackService.findOne(id);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Patch(':id')
   update(
     @Param('id') id: string,
