@@ -53,7 +53,7 @@ export class SchedulingService {
       to: user.email,
       subject: `FMH Animal Clinic Appointment`,
       html: `
-        <h1> Hello, ${createScheduleDto.name}. Thank your for booking an appointment with us! Please proceed to our clinic on the date you had chosen. </h1>
+        <h1> Hello, ${createScheduleDto.name}. Thank you for booking an appointment with us! Please wait for our email for your scheduled time. </h1>
 
         <div> Thank You! </div>
       `,
