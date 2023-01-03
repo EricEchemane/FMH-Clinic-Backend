@@ -23,11 +23,14 @@ export class SchedulingService {
   ) {}
 
   async create(createScheduleDto: CreateScheduleDto, user: RequestUser) {
-    const hasScheduleToday = await this.findOneBy({
+    const hasScheduleToday = await this.schedulesRepository.findOneBy({
       date: new Date(createScheduleDto.date),
+      status: ScheduleStatus.pending,
     });
     if (hasScheduleToday) {
-      throw new BadRequestException('You already have a schedule today');
+      throw new BadRequestException(
+        'You already have a pending schedule today',
+      );
     }
 
     let newEntry = this.schedulesRepository.create(createScheduleDto);
