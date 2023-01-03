@@ -22,6 +22,7 @@ export class FeedbackService {
   findAll() {
     return this.feedbackRepository.find({
       relations: ['user'],
+      where: { is_published: true },
     });
   }
 
