@@ -12,7 +12,6 @@ import { RequestUser } from 'src/user/decorators/get-user.decorator';
 import { QueryFailedError, Repository, Between } from 'typeorm';
 import { CreateScheduleDto, UpdateScheduleDto } from './dto';
 import { Schedule } from './entities';
-import { ScheduleStatus } from './types';
 
 @Injectable()
 export class SchedulingService {
@@ -125,7 +124,6 @@ export class SchedulingService {
           new Date(currentYear, currentMonth, 1),
           new Date(currentYear, nextMonth, 28),
         ),
-        status: ScheduleStatus.pending,
         archived: false,
       },
     });
