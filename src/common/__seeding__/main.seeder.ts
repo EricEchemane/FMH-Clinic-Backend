@@ -22,11 +22,11 @@ export default class MainSeeder implements Seeder {
     const productsFactory = factoryManager.get(Product);
     const feedbackFactory = factoryManager.get(Feedback);
 
-    const users = await userFactory.saveMany(30);
-    await productsFactory.saveMany(50);
+    const users = await userFactory.saveMany(5);
+    await productsFactory.saveMany(5);
 
     const schedules = await Promise.all(
-      Array(50)
+      Array(5)
         .fill('')
         .map(async () => {
           const schedule = await scheduleFactory.make({
@@ -39,7 +39,7 @@ export default class MainSeeder implements Seeder {
     await schedulesRepository.save(schedules);
 
     const feedbacks = await Promise.all(
-      Array(50)
+      Array(5)
         .fill('')
         .map(async () => {
           const feedback = await feedbackFactory.make({
