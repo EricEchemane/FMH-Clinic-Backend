@@ -17,6 +17,7 @@ export class CreateScheduleDto {
   @IsNotEmpty()
   pet_name: string;
 
+  @IsString()
   @IsNotEmpty()
   service: string;
 
