@@ -1,5 +1,5 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-import { PetServices, ScheduleStatus } from '../types';
+import { ScheduleStatus } from '../types';
 
 @Entity()
 export class Schedule {
@@ -18,11 +18,8 @@ export class Schedule {
   @Column()
   pet_name: string;
 
-  @Column({
-    type: 'enum',
-    enum: PetServices,
-  })
-  service: PetServices;
+  @Column({})
+  service: string;
 
   @Column()
   concern: string;
