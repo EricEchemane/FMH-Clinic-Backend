@@ -1,5 +1,4 @@
-import { IsDateString, IsEnum, IsNotEmpty, IsString } from 'class-validator';
-import { PetServices } from '../types';
+import { IsDateString, IsNotEmpty, IsString } from 'class-validator';
 
 export class CreateScheduleDto {
   // should be a ISO 8601 date
@@ -18,9 +17,8 @@ export class CreateScheduleDto {
   @IsNotEmpty()
   pet_name: string;
 
-  @IsEnum(PetServices)
   @IsNotEmpty()
-  service: PetServices;
+  service: string;
 
   @IsString()
   concern: string;
